@@ -3,6 +3,7 @@
 QB-Target with additional features such as outlining where nearby Targets are located this also includes a NP Inspired Eye look for the target instead of using the normal Fas-Fa Eye Icon.
 
 QBCore Help and Community
+https://discord.gg/AS2Y8TWejt
 
 ## Credits
 
