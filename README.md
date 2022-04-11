@@ -11,5 +11,7 @@ https://discord.gg/AS2Y8TWejt
 
 * Credit to [loljoshie](https://discord.gg/ljlabs) For the original HTML and JS for the Target.
 
+* Credit to [xtrsyz](https://github.com/overextended/qtarget/pull/70) for a better way of doing the dots
+
 ## Dependency
 * [PolyZone](https://github.com/mkafrin/PolyZone)
