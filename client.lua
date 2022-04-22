@@ -23,9 +23,6 @@ local pairs = pairs
 local CheckOptions
 local Bones = Load('bones')
 
-
-local listSprite = {}
-
 ---------------------------------------
 --- Source: https://github.com/citizenfx/lua/blob/luaglm-dev/cfx/libs/scripts/examples/scripting_gta.lua
 --- Credits to gottfriedleibniz
@@ -123,7 +120,7 @@ exports('DisableTarget', DisableTarget)
 local function DrawOutlineEntity(entity, bool)
 	if not Config.EnableOutline or IsEntityAPed(entity) then return end
 	SetEntityDrawOutline(entity, bool)
-	SetEntityDrawOutlineColor(entity, Config.OutlineColor[1], Config.OutlineColor[2], Config.OutlineColor[3])
+	SetEntityDrawOutlineColor(Config.OutlineColor[1], Config.OutlineColor[2], Config.OutlineColor[3], Config.OutlineColor[4])
 end
 
 exports('DrawOutlineEntity', DrawOutlineEntity)
@@ -326,24 +323,9 @@ local function EnableTarget()
 				end
 			else sleep += 20 end
 			if not success then
-				local closestDis, closestZone, pedcoords
-				if Config.DrawSprite then pedcoords = GetEntityCoords(playerPed) end
-				for k, zone in pairs(Zones) do
-					if Config.DrawSprite then
-						if #(pedcoords - zone.center) < (zone.targetoptions.drawDistance or Config.DrawDistance) and not listSprite[k] then
-							listSprite[k] = true
-							CreateThread(function()
-								while not HasStreamedTextureDictLoaded("shared") do Wait(10) RequestStreamedTextureDict("shared", true) end
-								while targetActive do
-									Wait(0)
-									SetDrawOrigin(zone.center.x, zone.center.y, zone.center.z, 0)
-									DrawSprite("shared", "emptydot_32", 0, 0, 0.02, 0.035, 0, 255,255,255, 255.0)
-									ClearDrawOrigin()
-								end
-								listSprite[k] = false
-							end)
-						end
-					end
+				-- Zone targets
+				local closestDis, closestZone
+				for _, zone in pairs(Zones) do
 					if distance < (closestDis or Config.MaxDistance) and distance <= zone.targetoptions.distance and zone:isPointInside(coords) then
 						closestDis = distance
 						closestZone = zone
