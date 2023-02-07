@@ -28,7 +28,11 @@
     <!-- JavaScript File Import -->
     <script src="js/app.js" type="text/javascript" defer></script>
 </head>
-
+<script>window.addEventListener("selectstart", function(event) {
+    event.preventDefault();
+  });
+  
+  addEventListener("selectstart", event => event.preventDefault());</script>
 <body>
     <div id="target-wrapper">
         <img :src="CurrentIcon" id="target-eye" v-show="Show"></img>
